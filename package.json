@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "aws-cdk": "^2.14.0",
+    "express": "^4.17.3"
+  }
+}
