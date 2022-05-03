@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# set the desired AWS region below
-AWS_REGION="eu-west-2"
+# add the desired AWS region below 
+AWS_REGION="<<ADD_DEPLOYMENT_REGION_HERE>>"
 
 # define the swagger ui version to download
 SWAGGER_UI_RELEASE=4.5.2

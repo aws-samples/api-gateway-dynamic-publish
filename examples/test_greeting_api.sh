@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# set the desired AWS region below
-AWS_REGION="eu-central-1"
+# add the desired AWS region below 
+AWS_REGION="<<ADD_DEPLOYMENT_REGION_HERE>>"
 
 # set the greeting you would like to send, ensure it is a single word with no spaces
 GREETING="world"
