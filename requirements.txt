@@ -57,7 +57,7 @@ policyuniverse==1.5.0.20220426
 prettytable==3.2.0
 publication==0.0.3
 py==1.11.0
-pycares==4.1.2
+pycares==4.2.0
 pycep-parser==0.3.4
 pycparser==2.21
 pyparsing==3.0.7
