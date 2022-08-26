@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+
+"""
+    greeting.py: 
+    Simple Lambda Function handler that is the target for
+    the API Gateway "Greeting" endpoint.
+"""
+
 import json
 import logging
 import traceback

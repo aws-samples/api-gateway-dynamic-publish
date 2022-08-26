@@ -1,7 +1,38 @@
 #!/bin/bash
 
-# add the desired AWS region below 
-AWS_REGION="<<ADD_DEPLOYMENT_REGION_HERE>>"
+###################################################################
+# Script Name     : view_api_docs.sh
+# Description     : Downloads Swagger UI, incorporates the
+#                   api-gateway-dynamic-project OpenAPI v3 spec
+#                   file into Swagger UI and runs Swagger UI
+#                   via a local node.js server which, by default,
+#                   listens on http://localhost:12345
+# Args            :
+# Author          : Damian McDonald
+###################################################################
+
+### <START> check if AWS credential variables are correctly set
+if [ -z "${AWS_ACCESS_KEY_ID}" ]
+then
+      echo "AWS credential variable AWS_ACCESS_KEY_ID is empty."
+      echo "Please see the guide below for instructions on how to configure your AWS CLI environment."
+      echo "https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html"
+fi
+
+if [ -z "${AWS_SECRET_ACCESS_KEY}" ]
+then
+      echo "AWS credential variable AWS_SECRET_ACCESS_KEY is empty."
+      echo "Please see the guide below for instructions on how to configure your AWS CLI environment."
+      echo "https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html"
+fi
+
+if [ -z "${AWS_DEFAULT_REGION}" ]
+then
+      echo "AWS credential variable AWS_DEFAULT_REGION is empty."
+      echo "Please see the guide below for instructions on how to configure your AWS CLI environment."
+      echo "https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html"
+fi
+### </END> check if AWS credential variables are correctly set
 
 # define the swagger ui version to download
 SWAGGER_UI_RELEASE=4.5.2
@@ -19,7 +50,7 @@ echo "Grabbing Cloudformation exports for Stack Name: ${STACK_NAME}"
 
 # the s3 bucket name containing the api documentation
 DOC_BUCKET_EXPORT_NAME="api-gateway-dynamic-publish-documentation-name"
-BUCKET_NAME=$(aws cloudformation --region ${AWS_REGION} describe-stacks --stack-name ${STACK_NAME} --query "Stacks[0].Outputs[?ExportName=='${DOC_BUCKET_EXPORT_NAME}'].OutputValue" --output text)
+BUCKET_NAME=$(aws cloudformation --region ${AWS_DEFAULT_REGION} describe-stacks --stack-name ${STACK_NAME} --query "Stacks[0].Outputs[?ExportName=='${DOC_BUCKET_EXPORT_NAME}'].OutputValue" --output text)
 
 # ask the user for permission to download swagger ui
 echo ""
@@ -60,7 +91,7 @@ rm -fr ${ROOT_DIR}/apidocs/.tmp
 
 # grab the dynamic swagger.json file
 cd ${ROOT_DIR}/apidocs/swagger-ui
-aws s3 cp s3://${BUCKET_NAME}/swagger.json swagger.json --region ${AWS_REGION}
+aws s3 cp s3://${BUCKET_NAME}/swagger.json swagger.json --region ${AWS_DEFAULT_REGION}
 
 # replace the defeault json path with the swagger.json downloaded from s3
 sed 's,https://petstore.swagger.io/v2/swagger.json,swagger.json,g' index.html | tee index.html > /dev/null 2>&1

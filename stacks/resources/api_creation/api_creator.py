@@ -1,7 +1,19 @@
-import boto3
+#!/usr/bin/env python
+
+"""
+    api_creator.py: 
+    Cloudformation custom resource lambda handler which performs the following tasks:
+    *   injects lambda functions arns (created during CDK deployment) into the 
+        OpenAPI 3 spec file (api_definition.yaml)
+    *   deploys or updates the API Gateway stage using the OpenAPI 3 spec file (api_definition.yaml)
+    *   deletes the API Gateway stage (if the Cloudformation operation is delete)
+"""
+
 import json
 import logging
 import os
+
+import boto3
 import yaml
 
 # set logging
@@ -42,7 +54,7 @@ def get_api_by_name(api_name: str) -> str:
     return None
 
 
-def create_api(api_template:str):
+def create_api(api_template: str) -> str:
     api_response = apigateway_client.import_api(
         Body=api_template,
         FailOnWarnings=True
@@ -51,7 +63,7 @@ def create_api(api_template:str):
     return api_response['ApiEndpoint'], api_response['ApiId']
 
 
-def update_api(api_template: str, api_name:str):
+def update_api(api_template: str, api_name: str) -> str:
     
     api_id = get_api_by_name(api_name)
 
@@ -64,9 +76,9 @@ def update_api(api_template: str, api_name:str):
         return api_response['ApiEndpoint'], api_response['ApiId']
 
 
-def delete_api(api_name: str):
+def delete_api(api_name: str) -> None:
     if get_api_by_name(api_name) is not None:
-        response = apigateway_client.delete_api(
+        apigateway_client.delete_api(
             ApiId=get_api_by_name(api_name)
         )
 
@@ -77,7 +89,7 @@ def deploy_api(
         api_access_logs_arn: str,
         throttling_burst_limit: int, 
         throttling_rate_limit: int
-    ):
+    ) -> None:
     apigateway_client.create_stage(
         AccessLogSettings={
             'DestinationArn': api_access_logs_arn,
@@ -94,7 +106,7 @@ def deploy_api(
     )
 
 
-def delete_api_deployment(api_id: str, api_stage_name: str):
+def delete_api_deployment(api_id: str, api_stage_name: str) -> None:
     try:
         apigateway_client.get_stage(
             ApiId=api_id,
@@ -111,7 +123,7 @@ def delete_api_deployment(api_id: str, api_stage_name: str):
         raise ValueError(f"Unexpected error encountered during api deployment deletion: {str(e)}")
 
 
-def publish_api_documentation(bucket_name, api_definition):
+def publish_api_documentation(bucket_name: str, api_definition: str)  -> None:
 
     api_definition_json=json.dumps(yaml.safe_load(api_definition))    
 

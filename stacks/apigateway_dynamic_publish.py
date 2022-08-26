@@ -1,22 +1,35 @@
-from aws_cdk import (
-    Stack,
-    RemovalPolicy,
-    BundlingOptions,
-    CfnOutput,
-    CustomResource,
-    Duration,
-    aws_iam as iam,
-    aws_s3 as s3,
-    aws_lambda,
-    aws_logs as logs,
-    custom_resources
-)
-from constructs import Construct
-import os
+#!/usr/bin/env python
+
+"""
+    apigateway_dynamic_publish.py:
+    CDK Stack that creates and deploys the infrastructure
+    required for the api-gateway-dynamic-publish project.
+"""
+
 import json
+import os
+
+from aws_cdk import (
+    BundlingOptions, 
+    CfnOutput, 
+    CustomResource, 
+    Duration,
+    RemovalPolicy, 
+    Stack
+)
+from aws_cdk import aws_iam as iam
+from aws_cdk import aws_lambda
+from aws_cdk import aws_logs as logs
+from aws_cdk import aws_s3 as s3
+from aws_cdk import custom_resources
+from constructs import Construct
 
 
 class ApiGatewayDynamicPublishStack(Stack):
+    """
+        CDK Stack that creates and deploys the infrastructure
+        required for the api-gateway-dynamic-publish project.
+    """
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
@@ -34,7 +47,8 @@ class ApiGatewayDynamicPublishStack(Stack):
             removal_policy=RemovalPolicy.DESTROY,
             auto_delete_objects=True,
             block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
-            public_read_access=False
+            public_read_access=False,
+            versioned=True
         )
 
         ##########################################################

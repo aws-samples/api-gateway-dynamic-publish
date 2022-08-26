@@ -7,3 +7,32 @@ output: cli
 directory:
   - cdk.out
 skip-check:
+  - CKV_AWS_7   # Ensure rotation for customer created CMKs is enabled
+  - CKV_AWS_18  # Ensure the S3 bucket has access logging enabled
+  - CKV_AWS_19  # Ensure the S3 bucket has server-side-encryption enabled
+  - CKV_AWS_20  # Ensure the S3 bucket does not allow READ permissions to everyone
+  - CKV_AWS_21  # Ensure the S3 bucket has versioning enabled
+  - CKV_AWS_33  # Ensure KMS key policy does not contain wildcard (*) principal
+  - CKV_AWS_40  # Ensure IAM policies are attached only to groups or roles (Reducing access management complexity may in-turn reduce opportunity for a principal to inadvertently receive or retain excessive privileges.)
+  - CKV_AWS_45  # Ensure no hard-coded secrets exist in lambda environment
+  - CKV_AWS_53  # Ensure S3 bucket has block public ACLS enabled
+  - CKV_AWS_54  # Ensure S3 bucket has block public policy enabled
+  - CKV_AWS_55  # Ensure S3 bucket has ignore public ACLs enabled
+  - CKV_AWS_56  # Ensure S3 bucket has 'restrict_public_bucket' enabled
+  - CKV_AWS_57  # Ensure the S3 bucket does not allow WRITE permissions to everyone
+  - CKV_AWS_60  # Ensure IAM role allows only specific services or principals to assume it
+  - CKV_AWS_61  # Ensure IAM role allows only specific principals in account to assume it
+  - CKV_AWS_62  # Ensure no IAM policies that allow full "*-*" administrative privileges are not created 
+  - CKV_AWS_63  # Ensure no IAM policies documents allow "*" as a statement's actions
+  - CKV_AWS_66  # Ensure that CloudWatch Log Group specifies retention days
+  - CKV_AWS_107 # Ensure IAM policies does not allow credentials exposure
+  - CKV_AWS_108 # Ensure IAM policies does not allow data exfiltration
+  - CKV_AWS_109 # Ensure IAM policies does not allow permissions management without constraints
+  - CKV_AWS_110 # Ensure IAM policies does not allow privilege escalation
+  - CKV_AWS_111 # Ensure IAM policies does not allow write access without constraints
+  - CKV_AWS_115 # Ensure that AWS Lambda function is configured for function-level concurrent execution limit
+  - CKV_AWS_116 # Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)
+  - CKV_AWS_117 # Ensure that AWS Lambda function is configured inside a VPC
+  - CKV_AWS_119 # Ensure DynamoDB Tables are encrypted using a KMS Customer Managed CMK
+  - CKV_AWS_158 # Ensure that CloudWatch Log Group is encrypted by KMS  
+  - CKV_AWS_173 # Check encryption settings for Lambda environmental variable

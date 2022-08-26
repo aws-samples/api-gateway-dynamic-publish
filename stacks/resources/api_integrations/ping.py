@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+
+"""
+    ping.py: 
+    Simple Lambda Function handler that is the target for
+    the API Gateway "Ping" endpoint.
+"""
+
 import json
 import logging
 import traceback
