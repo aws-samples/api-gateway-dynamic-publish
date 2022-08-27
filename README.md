@@ -33,7 +33,7 @@ The solution architecture discussed in this post is presented below:
 
 ![Solution Architecture](docs/assets/solution-architecture.png)
 
-1. CDK is used to synthesise a CloudFormation template.
+1. CDK is used to synthesize a CloudFormation template.
 2. The generated CloudFormation template includes the definition of a custom resource. The custom resource is implemented via a Lambda function which will dynamically substitute the function ARNs of the Amazon API Gateway Lambda integrations into the OpenAPI definition file.
 3. Once the custom resource has completed the substitution processes, the resulting OpenAPI definition file is used to create the Amazon API Gateway. The same OpenAPI definition file is then published to an S3 bucket to allow for documentation viewing.
 4. Upon successful deployment of the CloudFormation stack, end users can invoke the Amazon API Gateway. They can also view the API documentation via the [Swagger UI](https://swagger.io/tools/swagger-ui/).
@@ -548,9 +548,9 @@ Testing GET https://xxxxxxxx.execute-api.xx-xxxx-x.amazonaws.com/dev/greeting?gr
 
 ## Viewing the API documentation
 
-During the project deployment, the OpenAPI definition file [stacks/resources/api_creation/api_definition.yaml](stacks/resources/api_creation/api_definition.yaml), is uploaded to an S3 bucket where it can be consumed to visualise the API documentation via [Swagger UI](https://github.com/swagger-api/swagger-ui).
+During the project deployment, the OpenAPI definition file [stacks/resources/api_creation/api_definition.yaml](stacks/resources/api_creation/api_definition.yaml), is uploaded to an S3 bucket where it can be consumed to visualize the API documentation via [Swagger UI](https://github.com/swagger-api/swagger-ui).
 
-To view API documentation in the OpenAPI format, it is necessary to download Swagger UI which is a third party, open source project licenced under the Apache License 2.0.
+To view API documentation in the OpenAPI format, it is necessary to download Swagger UI which is a third party, open source project licensed under the Apache License 2.0.
 
 More information about Swagger UI can be found on the project's GitHub page; https://github.com/swagger-api/swagger-ui.
 
