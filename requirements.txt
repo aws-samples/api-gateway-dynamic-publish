@@ -13,7 +13,7 @@ botocore==1.24.8
 cached-property==1.5.2
 cachetools==5.0.0
 cattrs==1.10.0
-certifi==2021.10.8
+certifi==2022.12.7
 cffi==1.15.0
 charset-normalizer==2.0.12
 checkov==2.0.1098
