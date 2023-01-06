@@ -35,7 +35,7 @@ STACK_NAME="ApiGatewayDynamicPublish"
 
 # Get the API Endpoint
 API_ENDPOINT_URL_EXPORT_NAME="api-gateway-dynamic-publish-url"
-API_ENDPOINT_URL=$(aws cloudformation --region ${AWS_REGION} describe-stacks --stack-name ${STACK_NAME} --query "Stacks[0].Outputs[?ExportName=='${API_ENDPOINT_URL_EXPORT_NAME}'].OutputValue" --output text)
+API_ENDPOINT_URL=$(aws cloudformation --region ${AWS_DEFAULT_REGION} describe-stacks --stack-name ${STACK_NAME} --query "Stacks[0].Outputs[?ExportName=='${API_ENDPOINT_URL_EXPORT_NAME}'].OutputValue" --output text)
 API_GATEWAY_URL="${API_ENDPOINT_URL}"
 
 ################################################
