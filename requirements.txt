@@ -37,7 +37,7 @@ GitPython==3.1.32
 idna==3.3
 importlib-metadata==4.11.3
 iniconfig==1.1.1
-Jinja2==3.1.2
+Jinja2==3.1.4
 jmespath==0.10.0
 jsii==1.54.0
 jsonpath-ng==1.5.3
