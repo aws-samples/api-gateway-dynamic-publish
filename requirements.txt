@@ -66,7 +66,7 @@ pytest==7.0.1
 python-dateutil==2.8.2
 PyYAML==6.0
 regex==2022.4.24
-requests==2.27.1
+requests==2.32.2
 s3transfer==0.5.2
 schema==0.7.5
 semantic-version==2.9.0
